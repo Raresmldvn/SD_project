@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>User editor</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style2.css}"/>
+   </head>
+  <body>
+       <div class="centered-wrapper">
+      <!--  
+         In Thymeleaf the equivalent of
+         JSP's ${pageContext.request.contextPath}/edit.html
+         would be @{/edit.html}         
+         -->
+       <h1>Name:<span th:text="${name}"></span></h1>
+       <h3>Email:<span th:text="${email}"></span></h3>
+       Rating <span th:text="${rating}"></span>, by <span th:text="${rated}"></span> users.
+       <br/>
+       <br/>
+       
+       <h1>List of algorithms administrated by <span th:text="${name}"></span></h1>
+       <div>
+         <table border="1">
+            <tr>
+               <th>Id</th>
+               <th>Name</th>
+            </tr>
+            <tr th:each ="algorithm : ${algorithms}">
+               <td th:utext="${algorithm.id}">...</td>
+               <td th:utext="${algorithm.name}">...</td>
+            </tr>
+         </table>
+      </div>
+      
+       <h1>List of information submitted by <span th:text="${name}"></span></h1>
+        <div>
+         <table border="1">
+            <tr>
+               <th>Id</th>
+               <th>Algorithm</th>
+               <th>Languange</th>
+               <th>Rating</th>
+               <th>Rated by</th>
+            </tr>
+            <tr th:each ="information : ${informations}">
+               <td th:utext="${information.id}">...</td>
+                <td th:utext="${information.algorithmName}">...</td>
+               <td th:utext="${information.languageName}">...</td>
+               <td th:utext ="${information.rating}">...</td>
+               <td th:utext="${information.rated}">...</td>
+            </tr>
+         </table>
+      </div>
+        <h1>List of requests submitted to <span th:text="${name}"></span></h1>
+         <div>
+         <table border="1">
+            <tr>
+               <th>Id</th>
+               <th>Algorithm</th>
+               <th>Languange</th>
+               <th>Request by</th>
+               <th>Open</th>
+               <th>Accept</th>
+               <th>Reject</th>
+            </tr>
+            <tr th:each ="request : ${requests}">
+               <td th:utext="${request.id}">...</td>
+               <td   onclick="location.href='@{algorithm/{path}(path=${request.algorithmName})}'" ><span th:text = "${request.algorithmName}"></span></td>
+               <td th:utext="${request.languageName}">...</td>
+               <td th:utext="${request.requesterName}">...</td>
+               <td><form method="POST" th:object = "${request}">
+      <button type="submit" name = "action" th:value="${request.algorithmName} + ${request.id}">Open</button></form></td>
+      <td><form method="POST" th:object = "${request}">
+      <button type="submit" name = "action" th:value="Accept + ${request.id}">Accept</button></form></td>
+      <td><form method="POST" th:object = "${request}">
+      <button type="submit" name = "action" th:value="Reject + ${request.id}">Reject</button></form></td>
+            </tr>
+      
+         </table>
+      </div>
+      </div>
+   </body>
+</html>

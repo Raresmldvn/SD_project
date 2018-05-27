@@ -1,0 +1,18 @@
+h1 {
+	float: left;
+    color:#0000FF;
+}
+
+h2 {
+	
+    color:#FF0000;
+    width:50%;
+}
+
+table {
+    border-collapse: collapse;
+}
+ 
+table th, table td {
+    padding: 5px;
+}

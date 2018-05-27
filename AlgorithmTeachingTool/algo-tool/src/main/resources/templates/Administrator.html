@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Algorithm editor</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style2.css}"/>
+   </head>
+<body>
+<div class="centered-wrapper">
+	     <h1> Welcome <span th:text="${name}"></span>!</h1>
+	 <form  method="post">
+ 	<button type="submit" style="height:100px;width:400px;color:red" name = "action" value="Users" >MANAGE USERS</button>
+ 	<br/> <br/>
+	<button type="submit" style="height:100px;width:400px;color:blue" name = "action" value="Algorithms" >MANAGE ALGORITHMS</button>
+	<br/> <br/>
+	<button type="submit" style="height:100px;width:400px;color:green" name = "action" value="Visit" >VISIT ALGORITHMS</button>
+	<br/> <br/>
+     <button type="submit" style="height:100px;width:200px;color:orange" name = "action" value="RatingUsers" >GENERATE USER RATING REPORT</button>
+     <button type="submit" style="height:100px;width:200px;color:orange" name = "action" value="RatingInfos" >GENERATE INFO RATING REPORT</button>
+     </form>
+</div>
+</body>
+</html>

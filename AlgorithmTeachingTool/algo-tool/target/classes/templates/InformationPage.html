@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Information view</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style2.css}"/>
+   </head>
+
+<body th:background = "@{/images/back.jpg}">
+<div class = "centered-wrapper">
+<h1><span th:text="${algoName}"></span></h1> <br/>
+<italic>Language: <span th:text="${languageName}"></span> </italic> <br/>
+<italic>Submitted by: <span th:text="${userName}"></span></italic> <br/>
+<italic>Rating: <span th:text="${rating}"></span></italic> <br/>
+<textarea rows="20" cols="70" th:text = "${information}" >
+</textarea>
+      <form 
+         th:object="${ratingForm}" method="POST">
+         Rating:
+         <input type="text" th:field="*{grade}" />         
+         <input type="submit" value="Submit" />
+      </form>
+      
+      <!-- Check if errorMessage is not null and not empty -->
+       
+      <div th:if="${errorMessage}" th:utext="${errorMessage}"
+         style="color:red;font-style:italic;">
+         ...
+      </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Information view</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style2.css}"/>
+   </head>
+<body>
+
+<div class="centered-wrapper">
+  <h1> Welcome <span th:text="${name}"></span>!</h1>
+  <br/> <br/>
+  <form method="POST">
+      <button type="submit" name = "action" value="Account">GO TO ACCOUNT PAGE</button></form>
+      <br/> <br/>
+      <div>
+         <table border="1">
+            <tr>
+               <th>Id</th>
+               <th>Name</th>
+               <th>Admin</th>
+               <th>Open</th>
+            </tr>
+            <tr th:each ="algorithm : ${algorithms}">
+               <td th:utext="${algorithm.id}">...</td>
+               <td th:utext="${algorithm.name}">...</td>
+               <td th:utext="${algorithm.admin}">...</td>
+                <td><form method="POST" th:object = "${information}">
+      <button type="submit" name = "action" th:value="Open + ${algorithm.id}">Open</button></form></td>
+            </tr>
+         </table>
+      </div>
+      
+      <br/> <br/>
+		<form method="POST" th:object = "${searchForm}">
+		<h2>Search by name:</h2>
+		 <input type="text" th:field="*{grade}" />  
+      <button type="submit" name = "action" value="Search-name">Search</button></form>
+      
+      <br/> <br/>
+      
+      <form method="POST" th:object = "${disciplineForm}">
+		<h2>Search by discipline:</h2>
+		<select class="form-control" id="testOrder" name="testOrder" th:field = "*{grade}" >
+        <option value="">Select Discipline</option>
+        <option th:each="discipline : ${disciplines}"
+                th:value="${discipline.id}"
+                th:text="${discipline.name}"></option>
+    	</select>
+      <button type="submit" name = "action" value="Search-discipline">Search</button></form>
+      
+      <br/> <br/>
+      
+      <form method="POST" th:object = "${userForm}">
+		<h2>Search by administrator:</h2>
+		<select class="form-control" id="testOrder" name="testOrder" th:field = "*{grade}" >
+        <option value="">Select Administrator</option>
+        <option th:each="user : ${users}"
+                th:value="${user.id}"
+                th:text="${user.name}"></option>
+    	</select>
+      <button type="submit" name = "action" value="Search-user">Search</button></form>
+      </div>
+      
+      <br/> <br/>
+      <div class="centered-wrapper">
+      <form method="POST">
+      	 <button type="submit" name = "action" value="Search-all">View all algorithms</button>
+      </form>
+      </div>
+</body>
+</html>

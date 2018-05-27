@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Information form</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style2.css}"/>
+   </head>
+
+  <body>
+  
+  	  <div class = "centered-wrapper">
+     <center> <h1><font color="red">Welcome to the Students' Algorithm teaching tool!</font></h1> </center>
+       </div>
+      <!--  
+         In Thymeleaf the equivalent of
+         JSP's ${pageContext.request.contextPath}/edit.html
+         would be @{/edit.html}         
+         -->
+          <br/> <br/> <br/>
+         <div class="centered-wrapper">
+      <form th:action="@{/logIn}"
+         th:object="${logInForm}" method="POST">
+         <center>Username:
+         <input type="text" th:field="*{email}" />    </center>
+         <br/>
+         <center>Password:
+         <input type="text" th:field="*{password}" />  </center>   
+         <br/> <br/> <br/>
+         <center><button class="btn btn-primary" type="submit" value="LOG IN">LOG IN </button></center>
+      </form>
+       
+      <br/>
+       
+      <!-- Check if errorMessage is not null and not empty -->
+       
+      <div th:if="${errorMessage}" th:utext="${errorMessage}"
+         style="color:red;font-style:italic;">
+         ...
+      </div>
+       </div>
+       
+       <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>    
+<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Information form</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style2.css}"/>
+   </head>
+<body>
+<div class = "centered-wrapper">
+<h1><span th:text="${algoName}"></span></h1>
+      <form 
+         th:object="${informationForm}" method="POST">
+         <italic>Language:</italic>  <select class="form-control" id="testOrder" name="testOrder" th:field = "*{id}" > 
+        <option value="">Select Language</option>
+        <option th:each="language : ${languages}"
+                th:value="${language.id}"
+                th:text="${language.name}"></option>
+    	</select>
+    	<br/>
+    	<textarea rows="20" cols="70" th:field="*{text}">
+	   </textarea>
+	   <br/>
+         <input type="submit" value="Request to add" />
+      </form>
+      
+       <div th:if="${errorMessage}" th:utext="${errorMessage}"
+         style="color:red;font-style:italic;">
+         ...
+      </div>
+      </div>
+</body>
+</html>

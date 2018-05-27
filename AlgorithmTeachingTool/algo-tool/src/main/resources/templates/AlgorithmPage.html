@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Algorithm editor</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style2.css}"/>
+   </head>
+<body>
+<div class="centered-wrapper">
+	 <h1><span th:text="${algoName}"></span></h1>
+</div>
+
+<div class="centered-wrapper"> <italic>This algorithm page is administrated by  <span th:text="${adminName}"></span></italic></div>
+<br/>
+<div class="centered-wrapper"> <bold> <span th:text="${algorithmDescription}"></span></bold></div>
+<br/> <br/> <br/>
+<div class="centered-wrapper"> <h2>List of available implementations </h2></div>
+<div>
+         <table border="1">
+            <tr>
+               <th>Id</th>
+               <th>Language</th>
+               <th>Provider</th>
+               <th>Rating</th>
+               <th>Rated by</th>
+               <th>Open</th>
+            </tr>
+            <tr th:each ="information : ${informations}">
+               <td th:utext = "${information.id}">...</td>
+               <td th:utext="${information.languageName}">...</td>
+                <td th:utext="${information.userName}">...</td>
+               <td th:utext ="${information.rating}">...</td>
+               <td th:utext="${information.rated}">...</td>
+               <td><form method="POST" th:object = "${information}">
+      <button type="submit" name = "action" th:value="Open + ${information.id}">Open</button></form></td>
+            </tr>
+         </table>
+      </div>
+      
+      <div class = "centered-wrapper">
+      <form method = "post">
+      <button type="submit" style="height:50px;width:300px;color:red" name = "action" value="Add-info" >Request to submit information</button>
+     </form>
+      </div>
+      
+      <div class="centered-wrapper">
+      <br/> <br/>
+      <h2>LIST OF RELATED DISCIPLINES</h2>
+<ul  style="list-style-type:none" class = "list" th:each="discipline : ${disciplines}">
+              <li class="list-group-item" th:text="${discipline.name}">
+              </li>
+            </ul>
+</div>
+</body>
+</html>

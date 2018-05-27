@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Algorithm editor</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style2.css}"/>
+   </head>
+  <body>
+       
+      <!--  
+         In Thymeleaf the equivalent of
+         JSP's ${pageContext.request.contextPath}/edit.html
+         would be @{/edit.html}         
+         -->
+      
+      <div class = "centered-wrapper">
+      <div class = "h3">
+       <h1>Algorithms</h1>
+      <div>
+         <table border="1">
+            <tr>
+               <th>Id</th>
+               <th>Name</th>
+               <th>Admin</th>
+            </tr>
+            <tr th:each ="algorithm : ${algorithms}">
+               <td th:utext="${algorithm.id}">...</td>
+               <td th:utext="${algorithm.name}">...</td>
+               <td th:utext="${algorithm.admin}">...</td>
+            </tr>
+         </table>
+      </div>
+      
+      <h2>Algorithm Form</h2>
+    
+      <form 
+         th:object="${algorithmForm}" method="POST">
+         Id : <br/> <input type ="text" th:field="*{algId}" /> <br/>
+         Name: <br/>
+         <input type="text" th:field="*{name}" />     
+         <br/>
+         <select class="form-control" id="testOrder" name="testOrder" th:field = "*{id}" >
+        <option value="">Select Administrator</option>
+        <option th:each="user : ${users}"
+                th:value="${user.id}"
+                th:text="${user.name}"></option>
+    	</select>
+    	<br/>
+         <button type="submit" name = "action" value="Add-algorithm" >Add</button>
+        <button type="submit" name = "action" value="Update-algorithm" >Update</button>
+         <button type="submit" name = "action" value="Delete-algorithm" >Delete</button>
+      </form>
+      </div>
+      
+      
+      <div class = "h3">
+       <h1>Disciplines</h1>
+      <div>
+         <table border="1">
+            <tr>
+               <th>Id</th>
+               <th>Name</th>
+               <th>Description</th>
+            </tr>
+            <tr th:each ="discipline : ${disciplines}">
+               <td th:utext="${discipline.id}">...</td>
+               <td th:utext="${discipline.name}">...</td>
+               <td th:utext="${discipline.description}">...</td>
+            </tr>
+         </table>
+      </div>
+       <h2>Discipline Form</h2>
+    
+      <form 
+           th:object="${disciplineForm}" method="POST">
+         Id : <br/> <input type ="text" th:field="*{id}" /> <br/>
+         Name: <br/>
+         <input type="text" th:field="*{name}" />     
+         <br/>
+         Description:
+         <br/>
+        <textarea rows="4" cols="50" th:field = "*{description}">Enter description here...</textarea>
+    	<br/>
+         <button type="submit" name = "action" value="Add-discipline" >Add</button>
+        <button type="submit" name = "action" value="Update-discipline" >Update</button>
+         <button type="submit" name = "action" value="Delete-discipline" >Delete</button>
+      </form>
+      </div>
+
+      
+		
+       <div class="h3">
+       <h1>Languages</h1>
+      <div>
+         <table border="1">
+            <tr>
+               <th>Id</th>
+               <th>Name</th>
+            </tr>
+            <tr th:each ="language : ${languages}">
+               <td th:utext="${language.id}">...</td>
+               <td th:utext="${language.name}">...</td>
+            </tr>
+         </table>
+      </div>
+      
+ 
+       <h2>Language form</h2>
+    
+      <form 
+           th:object="${languageForm}" method="POST">
+         Id : <br/> <input type ="text" th:field="*{id}" /> <br/>
+         Name: <br/>
+         <input type="text" th:field="*{name}" />     
+         <br/>
+    	<br/>
+         <button type="submit" name = "action" value="Add-language" >Add</button>
+        <button type="submit" name = "action" value="Update-language" >Update</button>
+         <button type="submit" name = "action" value="Delete-language" >Delete</button>
+      </form>
+      </div>
+      <br/>
+      <br/>
+      <br/>
+      <!-- Check if errorMessage is not null and not empty -->
+       <div class="centered-wrapper">
+       <h2>Algorithm and disciplines:</h2>
+        <form 
+         th:object="${algdisForm}" method="POST">
+         <select class="form-control" id="testOrder" name="testOrder" th:field = "*{algId}" >
+        <option value="">Select Algorithm</option>
+        <option th:each="algorithm : ${algorithms}"
+                th:value="${algorithm.id}"
+                th:text="${algorithm.name}"></option>
+    	</select>
+    	<select class="form-control" id="testOrder" name="testOrder" th:field = "*{disId}" >
+        <option value="">Select Algorithm</option>
+        <option th:each="discipline : ${disciplines}"
+                th:value="${discipline.id}"
+                th:text="${discipline.name}"></option>
+    	</select>
+    	<br/>
+         <button type="submit" name = "action" value="Add-relation" >Add relation</button>
+      </form>
+      </div>
+      <div th:if="${errorMessage}" th:utext="${errorMessage}"
+         style="color:red;font-style:italic;">
+         ...
+      </div>
+       </div>
+   </body>
+</html>

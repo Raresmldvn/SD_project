@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>User editor</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style2.css}"/>
+   </head>
+  <body>
+       
+      <!--  
+         In Thymeleaf the equivalent of
+         JSP's ${pageContext.request.contextPath}/edit.html
+         would be @{/edit.html}         
+         -->
+         <div class="centered-wrapper">
+       <h1>Registrated users</h1>
+       
+      <div class = "centerd-wrapper">
+         <table border="1">
+            <tr>
+               <th>Id</th>
+               <th>Name</th>
+               <th>Email</th>
+               <th>Password</th>
+               <th>Rating</th>
+               <th>Rated by</th>
+            </tr>
+            <tr th:each ="user : ${users}">
+               <td th:utext="${user.id}">...</td>
+               <td th:utext="${user.name}">...</td>
+               <td th:utext="${user.email}">...</td>
+               <td th:utext="${user.password}">...</td>
+               <td th:utext="${user.rating}">...</td>
+               <td th:utext="${user.rated}">...</td>
+            </tr>
+         </table>
+      </div>
+      
+      <h2>User Form</h2>
+    
+      <form 
+         th:object="${userForm}" method="POST">
+         ID <br/>
+         <input type="text" th:field="*{id}" />    
+         <br/>
+         NAME <br/>
+         <input type="text" th:field="*{name}" />     
+         <br/>
+         EMAIL <br/>
+         <input type="text" th:field="*{email}" />     
+         <br/>
+         PASSWORD <br/>
+         <input type="text" th:field="*{password}" />     
+         <br/>
+         <button type="submit" name = "action" value="Add" >Add</button>
+        <button type="submit" name = "action" value="Update" >Update</button>
+         <button type="submit" name = "action" value="Delete" >Delete</button>
+      </form>
+       </div>
+      <br/>
+       
+      <!-- Check if errorMessage is not null and not empty -->
+       
+      <div th:if="${errorMessage}" th:utext="${errorMessage}"
+         style="color:red;font-style:italic;">
+         ...
+      </div>
+       
+   </body>
+</html>
